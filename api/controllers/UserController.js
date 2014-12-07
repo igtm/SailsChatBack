@@ -15,7 +15,7 @@ module.exports = {
             if(err) return next(err);
 
             User.watch(req.socket);
-            User.subscribe(req.socket, users,['create','destroy']);
+            User.subscribe(req.socket, users);
             User.findOne(id, function(e, user) {
                 User.publishCreate(user,req.socket);
             });

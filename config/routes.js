@@ -34,8 +34,10 @@ module.exports.routes = {
 
     'post /user/subscribe': 'UserController.subscribe',
     'get /user/login': 'UserController.login',
-    'get /room': 'RoomController.enter',
-    'delete /room': 'RoomController.exit'
+    // /model名/:id/collectionの属性名/入れたいid でidが自動で挿入、
+    'post /room/:room_id/users': 'RoomController.enter', // blueprints機能：next()すれば、この後add toが自動でされる
+    'delete /room/:room_id/users': 'RoomController.exit', // blueprints機能：next()すれば、この後remove fromが自動でされる
+    'post /chat/public': 'ChatController.public'
 
   /***************************************************************************
   *                                                                          *

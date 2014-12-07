@@ -10,24 +10,28 @@ module.exports = {
     enter: function(req, res, next) {
         console.log('enter!!');
         var room_id = req.param('room_id');
-        var id = req.param('id');
+        Room.subscribe(req, room_id);
+        return next();
+
+        /*
         Room.findOne(room_id, function(e, room) {
-            console.log(room.users);
             if(room.users.indexOf(id) === -1){
                 room.users.add(id);
                 room.save();
                 //Room.watch(req.socket);
                 Room.subscribe(req.socket, room_id, ['create', 'destroy', 'message']);
+                // 自分のモデルを発信！
                 User.findOne(id, function(e, user) {
                     user.rooms.add(room_id);
                     user.save(function(e, user) {
                         var enteringUser = _.extend(user,{enterTheRoom: room_id});
+                        console.log(enteringUser);
                         Room.publishCreate(enteringUser, req.socket);
-                        return res.json({room_id: room_id});
+                        next();
                     });
                 });
             }
-        });
+        });*/
         /*
         User.findOne(id, function(e, user) {
             if(e)return next(e);
@@ -60,7 +64,10 @@ module.exports = {
     },
 
     exit: function(req, res, next) {
-
+        console.log('exit!!');
+        var room_id = req.param('room_id');
+        Room.unsubscribe(req, room_id, ['message']);
+        return next();
     }
 
 };

@@ -8,6 +8,8 @@
 module.exports = {
     schema: true,
 
+    autosubscribe: ['destroy'],
+
   attributes: {
       name: {
           type:'string',

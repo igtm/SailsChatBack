@@ -7,6 +7,7 @@
 
 module.exports = {
     schema: true,
+    autosubscribe: ['add:users','remove:users','message'],
 
   attributes: {
     name:{

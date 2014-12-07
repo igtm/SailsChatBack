@@ -17,7 +17,7 @@ module.exports.bootstrap = function(cb) {
     Room.count(function(e, cnt){
         console.log(cnt);
         if(cnt === 0){
-            var defaultRooms = [{name: 'room1'},{name: 'room2'},{name: 'room3'}];
+            var defaultRooms = [{id: 1, name: 'room1'},{id: 2, name: 'room2'},{id: 3, name: 'room3'}];
             Room.create(defaultRooms, function(e, rooms) {
                 cb();
             });
